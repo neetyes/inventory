@@ -1,0 +1,8 @@
+<fieldset>
+  <%= f.collection_select :item_name, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+  <%= f.text_field :quantity, :class => "form-control", :placeholder => "quantity" %>
+  <%= f.text_field :unit_sell_price, :class => "form-control", :placeholder => "unit sell price" %>
+  <input type="text" class="form-control" placeholder="total">
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "[remove]", '#', class: "remove_fields" %>
+</fieldset>

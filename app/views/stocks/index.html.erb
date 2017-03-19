@@ -1,0 +1,31 @@
+<table class="table table-bordered" id="courses">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Item name</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+    <th>Est Sell Price</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @stocks.each_with_index do |stock, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
+        </td>
+        <td><%= stock.item.name%></td>
+        <td><%= stock.quantity %></td>
+        <td><%= stock.unit_price %></td>
+        <td><%= stock.est_sell_price %></td>
+        <td>
+          <%= link_to "", edit_stock_path(stock), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", stock_path(stock), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

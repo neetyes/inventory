@@ -1,0 +1,34 @@
+<div class="action text-right">
+  <a href="<%= new_customer_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="items">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Contact no.</th>
+    <th>Email</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @customers.each_with_index do |customer, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_customers_per_page + i+1 %>
+        </td>
+        <td><%= customer.name%></td>
+        <td><%= customer.address %></td>
+        <td><%= customer.contact_no %></td>
+        <td><%= customer.email %></td>
+        <td>
+          <%= link_to "", edit_customer_path(customer), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", customer_path(customer), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

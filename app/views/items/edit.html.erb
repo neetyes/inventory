@@ -1,0 +1,39 @@
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for (@item), url: items_path, :html => {:class => "form-horizontal"} do |f| %>
+      <div class="form-group">
+        <%= f.label :name, :class => "col-md-3" %>
+        <div class="col-md-9">
+          <%= f.text_field :name, :class => "form-control", :placeholder => "item_name" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :unit_id, :class => "col-md-3" %>
+        <div class="col-md-9">
+          <%=f.collection_select :unit_id, Unit.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"}%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :item_code, :class => "col-md-3" %>
+        <div class="col-md-9">
+          <%= f.text_field :item_code, :class => "form-control", :placeholder => "item_code" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, :class => "col-md-3" %>
+        <div class="col-md-9"><%= f.text_area :description, :class => "form-control", :placeholder => "discription" %> </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :item_group_id, :class => "col-md-3" %>
+        <div class="col-md-9">
+          <%=f.collection_select :item_group_id, ItemGroup.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"}%>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+          <%= button_tag(type: "submit", class: "btn btn-success") do %>
+              <span><i class="fa fa-plus"></i> Update</span>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>

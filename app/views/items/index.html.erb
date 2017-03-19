@@ -1,0 +1,42 @@
+<div class="action text-right">
+  <a href="<%= new_item_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="items">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Item code</th>
+    <th>Unit</th>
+    <th>Item group</th>
+    <th>Unit Price</th>
+    <th>Est sell Price</th>
+    <th>Description</th>
+    <th>Stock</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @items.each_with_index do |item, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
+        </td>
+        <td><%= item.name%></td>
+        <td><%= item.item_code %></td>
+        <td><%= item.unit.name %></td>
+        <td><%= item.item_group.name %></td>
+        <td><%= item.stock.unit_price %></td>
+        <td><%= item.stock.est_sell_price %></td>
+        <td><%= item.description %></td>
+        <td><%= item.stock.quantity %></td>
+        <td>
+          <%= link_to "", edit_item_path(item), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", item_path(item), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

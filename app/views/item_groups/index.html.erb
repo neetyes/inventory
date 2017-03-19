@@ -1,0 +1,32 @@
+<div class="action text-right">
+  <a href="<%= new_item_group_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="courses">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Parent id</th>
+    <th>Description</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @item_groups.each_with_index do |item_group, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
+        </td>
+        <td><%= item_group.name%></td>
+        <td><%= item_group.parent_id %></td>
+        <td><%= item_group.description %></td>
+        <td>
+          <%= link_to "", edit_item_group_path(item_group), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", item_group_path(item_group), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

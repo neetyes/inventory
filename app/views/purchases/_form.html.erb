@@ -1,0 +1,76 @@
+<body>
+<%= form_for (@purchase), :html => {:class => "form-horizontal"} do |f| %>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= f.label :supplier_id, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.collection_select :supplier_id, Supplier.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :bill_number, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :bill_number, :class => "form-control", :placeholder => "bill_number" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= f.label :purchase_date, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :purchase_date, :class => "form-control ", :id => "purchase_date", :placeholder => "YYYY/MM/DD" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <%= f.fields_for :purchase_items do |g| %>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Item's Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <%= g.collection_select :item_id, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+            </td>
+            <td>
+              <%= g.text_field :quantity, :class => "form-control ", :id => "start_date", :placeholder => "Quantity" %>
+            </td>
+            <td>
+              <%= g.text_field :unit_price, :class => "form-control ", :id => "start_date", :placeholder => "Unit Price" %>
+            </td>
+            <td>
+              <%= g.text_field :total, :class => "form-control ", :id => "start_date", :placeholder => "Total" %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+    <% end %>
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <%= button_tag(type: "submit", class: "btn btn-success") do %>
+            <span><i class="fa fa-plus"></i> Create</span>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+<script>
+    $('#purchase_date').datepicker({
+        format: "yyyy/mm/dd",
+    }).on('changeDate', function (e) {
+        $(this).datepicker('hide');
+    });
+</script>
+</body>

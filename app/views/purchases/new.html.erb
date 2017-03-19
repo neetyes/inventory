@@ -1,0 +1,16 @@
+<div class="container">
+<% if @purchase.errors.any? %>
+    <div class="alert-danger">
+      <h1>
+        <%= pluralize(@purchase.errors.count, "error") %>
+        occured
+      </h1>
+      <ul>
+        <% @purchase.errors.full_messages.each do |e| %>
+            <li> <%= e %> </li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+<%= render "form" %>
+</div>

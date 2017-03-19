@@ -1,0 +1,38 @@
+<div class="action text-right">
+  <a href="<%= new_purchase_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="items">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Supplier's Name</th>
+    <th>Bill number</th>
+    <th>Purchase Date</th>
+    <th>Discount</th>
+    <th>Tax</th>
+    <th>Grand Total</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @purchases.each_with_index do |purchase, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_purchases_per_page + i+1 %>
+        </td>
+        <td><%= purchase.supplier_id%></td>
+        <td><%= purchase.bill_number%></td>
+        <td><%= purchase.purchase_date%></td>
+        <td><%= purchase.discount %></td>
+        <td><%= purchase.tax%></td>
+        <td><%= purchase.grand_total %></td>
+        <td>
+          <%= link_to "", edit_purchase_path(purchase), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", purchase_path(purchase), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

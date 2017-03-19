@@ -1,0 +1,33 @@
+<div class="action text-right">
+  <a href="<%= new_fiscal_year_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="courses">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @fiscal_years.each_with_index do |fiscal_year, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
+        </td>
+        <td><%= fiscal_year.name%></td>
+        <td><%= fiscal_year.start_date %></td>
+        <td><%= fiscal_year.end_date %></td>
+        <td>
+          <%= link_to "", edit_fiscal_year_path(fiscal_year), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", fiscal_year_path(fiscal_year), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @fiscal_years, renderer: BootstrapPagination::Rails %>

@@ -1,0 +1,33 @@
+<body>
+<%= form_for (@stock), :html => {:class => "form-horizontal"} do |f| %>
+    <div class="col-md-6 col-md-offset-3 well">
+      <div class="form-group">
+        <%= f.label :item_id, :class => "col-md-4" %>
+        <div class="col-md-8">
+          <%=f.collection_select :item_id, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"}%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :quantity, :class=> "col-md-4" %>
+        <div class="col-md-8">
+          <%= f.text_field :quantity, :class => "form-control ",:id =>"start_date", :placeholder => "Quantity" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :unit_price, :class => "col-md-4" %>
+        <div class="col-md-8"><%= f.text_field :unit_price, :class => "form-control", :placeholder => "Unit price" %> </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :est_sell_price, :class => "col-md-4" %>
+        <div class="col-md-8"><%= f.text_field :est_sell_price, :class => "form-control", :placeholder => "Estimated selling price" %> </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+          <%= button_tag(type: "submit", class: "btn btn-success") do %>
+              <span><i class="fa fa-plus"></i> Update</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>
+</body>

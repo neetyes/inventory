@@ -1,0 +1,24 @@
+1 company_profiles
+2 units
+3 item_groups
+4 items
+5 sales
+6 purchase
+7 stocks
+8 logs
+9 fiscal_years
+10 current_fical_years
+11 cashflows
+12 supplier
+13 customer
+14 users
+#
+8 14
+9 10
+4 2
+7 3
+4 3
+5 3
+6 3
+5 13
+6 12

@@ -1,0 +1,20 @@
+<table class="table table-bordered" id="items">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>User's Name</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @logs.each_with_index do |log, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_logs_per_page + i+1 %>
+        </td>
+        <td><%= log.user.email%></td>
+        <td><%= log.description %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

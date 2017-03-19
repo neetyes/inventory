@@ -1,0 +1,89 @@
+<body>
+<div class="container" id="system">
+  <div class="row">
+    <div class="col-md-4">
+          <div class="well">
+            <div align="center">
+              <%= image_tag("sales.png", :alt => "Sales") %>
+              <h3>Sales</h3>
+              <p>
+                <a href="<%= new_sale_path %>" class="btn btn-primary">Sale Items</a>
+                <a href="<%= sales_path %>" class="btn btn-success">View Sales</a>
+              </p>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-4">
+          <div class="well">
+            <div align="center">
+              <%= image_tag("Items.png", :alt => "Items") %>
+              <h3>Items</h3>
+              <p>
+                <a href="<%= new_item_path %>" class="btn btn-primary">Add Items</a>
+                <a href="<%= items_path %>" class="btn btn-success">View Stock</a>
+              </p>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-4">
+          <div class="well">
+            <div align="center">
+              <%= image_tag("purchase.png", :alt => "Purchases") %>
+              <h3>Purchases</h3>
+              <p>
+                <a href="<%= new_purchase_path %>" class="btn btn-primary">Purchase Items</a>
+                <a href="<%= purchases_path %>" class="btn btn-success">View Purchases</a>
+              </p>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= link_to users_path, :action => 'go' do %>
+          <div class="well">
+            <div align="center">
+              <%= image_tag("user.png", :alt => "users") %>
+              <h3>Users</h3>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= link_to customers_path, :action => 'go' do %>
+          <div class="well">
+            <div align="center">
+              <%= image_tag("customer.png", :alt => "Customer") %>
+              <h3>Customers</h3>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= link_to suppliers_path, :action => 'go' do %>
+          <div class="well">
+            <div align="center">
+              <%= image_tag("supplier.png", :alt => "Customer") %>
+              <h3>Suppliers</h3>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+          <div class="well" id="about">
+            <div align="center">
+              <%= image_tag("unit.png", :alt => "Settings") %>
+              <h3>Settings</h3>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#about").click(function () {
+            $('#system').load('settings.html')
+        });
+    });
+</script>
+</body>

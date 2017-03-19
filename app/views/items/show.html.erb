@@ -1,0 +1,36 @@
+<div class="container col-md-6 col-md-offset-3">
+  <table class="table table-striped">
+    <tr>
+      <th>Name:</th>
+      <td><%= @item.name %></td>
+    </tr>
+    <tr>
+      <th>Unit id:</th>
+      <td><%= @item.unit_id %></td>
+    </tr>
+    <tr>
+      <th>Item code:</th>
+      <td><%= @item.item_code %></td>
+    </tr>
+    <tr>
+      <th>Item group id:</th>
+      <td><%= @item.item_group.name %></td>
+    </tr>
+    <tr>
+      <th>Unit Price:</th>
+      <td><%= @item.stock.unit_price %></td>
+    </tr>
+    <tr>
+      <th>Est Sell Price:</th>
+      <td><%= @item.stock.est_sell_price %></td>
+    </tr>
+    <tr>
+      <th>Discription:</th>
+      <td><%= @item.description %></td>
+    </tr>
+    <tr>
+      <th>Quantity:</th>
+      <td><%= @item.stock.quantity %></td>
+    </tr>
+  </table>
+</div>

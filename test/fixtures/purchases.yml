@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supplier_id: 1
+  item_id: 1
+  unit_cost_price: 9.99
+  quantity: 1
+  cash_credit: MyString
+  fiscal_year_id: 1
+
+two:
+  supplier_id: 1
+  item_id: 1
+  unit_cost_price: 9.99
+  quantity: 1
+  cash_credit: MyString
+  fiscal_year_id: 1

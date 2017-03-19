@@ -1,0 +1,30 @@
+<div class="action text-right">
+  <a href="<%= new_unit_path %>" class="btn btn-primary">New</a>
+</div>
+<table class="table table-bordered" id="items">
+  <thead>
+  <tr>
+    <th>SN</th>
+    <th>Name</th>
+    <th>Print name</th>
+    <th>Operation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @units.each_with_index do |unit, i| %>
+      <tr>
+        <td>
+          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
+        </td>
+        <td><%= unit.name%></td>
+        <td><%= unit.print_name %></td>
+        <td>
+          <%= link_to "", edit_unit_path(unit), :class => "fa fa-pencil", :title => "Edit" %>
+          <%= link_to "", unit_path(unit), :class => "fa fa-trash", :title => "Delete",
+                      method: :delete,
+                      data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
