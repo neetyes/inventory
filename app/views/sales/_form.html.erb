@@ -1,0 +1,88 @@
+<body>
+<%= form_for (@sale), :html => {:class => "form-horizontal"} do |f| %>
+    <% if @sale.errors.any? %>
+        <div class="alert-danger">
+          <h1>
+            <%= pluralize(@sale.errors.count, "error") %>
+            occured
+          </h1>
+          <ul>
+            <% @sale.errors.full_messages.each do |e| %>
+                <li> <%= e %> </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= f.label :customer_id, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.collection_select :customer_id, Customer.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :bill_number, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :bill_number, :class => "form-control", :placeholder => "bill_number" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= f.label :sale_date, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :sales_date, :class => "form-control ", :id => "sale_date", :placeholder => "YYYY/MM/DD" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.fields_for :sale_items do |g| %>
+        <table class="table table-striped" id="items">
+          <thead>
+          <tr>
+            <th><%= g.label :item_id %></th>
+            <th><%= g.label :quantity %></th>
+            <th><%= g.label :unit_price %></th>
+            <th><%= g.label :total %></th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="next">
+          <tr>
+            <td><%= g.collection_select :item_id, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %></td>
+            <td><%= g.text_field :quantity, :class => "form-control", :placeholder => "quantity" %></td>
+            <td><%= g.text_field :unit_price, :class => "form-control", :placeholder => "unit sell price" %></td>
+            <td><%= g.text_field :total, :class => "form-control", :placeholder => "total" %></td>
+          </tr>
+
+          </tbody>
+        </table>
+    <% end %>
+    <div class="form-group">
+      <div class="col-md-offset-4 col-md-4">
+        <%= button_tag(type: "submit", class: "btn btn-success") do %>
+            <span><i class="fa fa-plus"></i> Create</span>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#add").click(function () {
+            $('#next_item').load('next')
+        })
+    });
+</script>
+<script>
+    $('#sale_date').datepicker({
+        format: "yyyy/mm/dd",
+    }).on('changeDate', function (e) {
+        $(this).datepicker('hide');
+    });
+</script>
+</body>

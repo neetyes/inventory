@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
-  belongs_to :unit, required:false
-  belongs_to :item_group, required:false
+  belongs_to :unit
+  belongs_to :item_group
   has_one :stock, dependent: :destroy,inverse_of: :item
   accepts_nested_attributes_for :stock
   has_many :sales

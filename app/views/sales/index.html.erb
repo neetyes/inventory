@@ -6,11 +6,11 @@
   <tr>
     <th>SN</th>
     <th>Customer's id</th>
-    <th>Item's name</th>
-    <th>Uni sell price</th>
-    <th>Quantity</th>
-    <th>Cash credit</th>
-    <th>Fiscal_year_id</th>
+    <th>Bill number</th>
+    <th>Sales date</th>
+    <th>Discount</th>
+    <th>Tax</th>
+    <th>Grand Total</th>
     <th>Operation</th>
   </tr>
   </thead>
@@ -21,11 +21,11 @@
           <%= (@page.to_i - 1) * @number_of_sales_per_page + i+1 %>
         </td>
         <td><%= sale.customer_id %></td>
-        <td><%= sale.item_id %></td>
-        <td><%= sale.unit_sell_price %></td>
-        <td><%= sale.quantity %></td>
-        <td><%= sale.cash_credit %></td>
-        <td><%= sale.fiscal_year_id %></td>
+        <td><%= sale.bill_number %></td>
+        <td><%= sale.sales_date %></td>
+        <td><%= sale.discount %></td>
+        <td><%= sale.tax %></td>
+        <td><%= sale.grand_total %></td>
         <td>
           <%= link_to "", edit_sale_path(sale), :class => "fa fa-pencil", :title => "Edit" %>
           <%= link_to "", sale_path(sale), :class => "fa fa-trash", :title => "Delete",
