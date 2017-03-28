@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+      <h3>Settings</h3>
+      <hr>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li>Settings</li>
+      </ol>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-3">
+        <%= link_to users_path, :action => 'go' do %>
+            <div class="well">
+              <div align="center">
+                <%= image_tag("add-user.png", :alt => "users") %>
+                <h3>Users</h3>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to logs_path, :action => 'go' do %>
+            <div class="well">
+              <div align="center">
+                <%= image_tag("log.png", :alt => "Customer") %>
+                <h3>Log</h3>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to company_profiles_path, :action => 'go' do %>
+            <div class="well">
+              <div align="center">
+                <%= image_tag("company.png", :alt => "Customer") %>
+                <h3>Company</h3>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to fiscal_years_path, :action => 'go' do %>
+            <div class="well">
+              <div align="center">
+                <%= image_tag("fiscalyear.png", :alt => "users") %>
+                <h3>Fiscal Year</h3>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>

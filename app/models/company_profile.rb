@@ -1,6 +1,5 @@
 class CompanyProfile < ApplicationRecord
-  has_many :fiscal_years, :dependent => :destroy
-
+  belongs_to :fiscal_year
   validates :name, presence: true, length: {maximum: 30,minimum:2 }
   validates :vdc_mun, presence: true
   validates :ward_no, presence: true, numericality: {only_integer: true},length: {maximum: 2 }

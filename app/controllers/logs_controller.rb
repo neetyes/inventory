@@ -1,4 +1,5 @@
 class LogsController < ApplicationController
+  add_breadcrumb "Settings", :settings_index_path
   add_breadcrumb "Logs", :logs_path
 
   def index

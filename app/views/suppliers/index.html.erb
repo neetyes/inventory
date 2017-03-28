@@ -1,9 +1,21 @@
-<div class="action text-right">
-  <a href="<%= new_supplier_path %>" class="btn btn-primary">New</a>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Supplier|
+    <small>List</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li>Supplier</li>
+    </ol>
+  </div>
 </div>
-<table class="table table-bordered" id="items">
+<div class="action text-center">
+  <a href="<%= new_supplier_path %>" class="btn btn-primary">Add New Supplier</a>
+</div>
+<table class="table table-bordered table-hover" id="customer">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
     <th>Name</th>
     <th>Address</th>
@@ -32,3 +44,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function(){
+        $('#customer').DataTable();
+    });
+</script>

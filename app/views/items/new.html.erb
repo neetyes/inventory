@@ -1,72 +1,83 @@
-<div class="container">
-  <%= form_for (@item), url: items_path, :html => {:class => "form-horizontal"} do |f| %>
-      <div class="col-md-6 col-md-offset-3">
-        <div class="well">
-          <% if @item.errors.any? %>
-              <div class="alert-danger">
-                <h1>
-                  <%= pluralize(@item.errors.count, "error") %>
-                  occured
-                </h1>
-                <ul>
-                  <% @item.errors.full_messages.each do |e| %>
-                      <li> <%= e %> </li>
-                  <% end %>
-                </ul>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Item|
+      <small>Add</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/items">Items</a></li>
+      <li>New</li>
+    </ol>
+  </div>
+</div>
+<%= form_for (@item), url: items_path, :html => {:class => "form-horizontal"} do |f| %>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well">
+        <% if @item.errors.any? %>
+            <div class="alert-danger">
+              <h1>
+                <%= pluralize(@item.errors.count, "error") %>
+                occured
+              </h1>
+              <ul>
+                <% @item.errors.full_messages.each do |e| %>
+                    <li> <%= e %> </li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :name, :class => "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <%= f.text_field :name, :class => "form-control", :placeholder => "item_name" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :unit_id, :class => "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <%= f.collection_select :unit_id, Unit.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :item_code, :class => "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <%= f.text_field :item_code, :class => "form-control", :placeholder => "item_code" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :description, :class => "col-md-3 control-label" %>
+          <div class="col-md-9"><%= f.text_area :description, :class => "form-control", :placeholder => "discription" %> </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :item_group_id, :class => "col-md-3 control-label" %>
+          <div class="col-md-9">
+            <%= f.collection_select :item_group_id, ItemGroup.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+          </div>
+        </div>
+        <%= f.fields_for :stock do |g| %>
+            <div class="form-group">
+              <%= g.label :quantity, :class => "col-md-3 control-label" %>
+              <div class="col-md-9">
+                <%= g.text_field :quantity, :class => "form-control ", :id => "start_date", :placeholder => "Quantity" %>
               </div>
-          <% end %>
-          <div class="form-group">
-            <%= f.label :name, :class => "col-md-3" %>
-            <div class="col-md-9">
-              <%= f.text_field :name, :class => "form-control", :placeholder => "item_name" %>
             </div>
-          </div>
-          <div class="form-group">
-            <%= f.label :unit_id, :class => "col-md-3" %>
-            <div class="col-md-9">
-              <%= f.collection_select :unit_id, Unit.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+            <div class="form-group">
+              <%= g.label :unit_price, :class => "col-md-3 control-label" %>
+              <div class="col-md-9"><%= g.text_field :unit_price, :class => "form-control", :placeholder => "Unit price" %> </div>
             </div>
-          </div>
-          <div class="form-group">
-            <%= f.label :item_code, :class => "col-md-3" %>
-            <div class="col-md-9">
-              <%= f.text_field :item_code, :class => "form-control", :placeholder => "item_code" %>
+            <div class="form-group">
+              <%= g.label :est_sell_price, :class => "col-md-3 control-label" %>
+              <div class="col-md-9"><%= g.text_field :est_sell_price, :class => "form-control", :placeholder => "Estimated selling price" %> </div>
             </div>
-          </div>
-          <div class="form-group">
-            <%= f.label :description, :class => "col-md-3" %>
-            <div class="col-md-9"><%= f.text_area :description, :class => "form-control", :placeholder => "discription" %> </div>
-          </div>
-          <div class="form-group">
-            <%= f.label :item_group_id, :class => "col-md-3" %>
-            <div class="col-md-9">
-              <%= f.collection_select :item_group_id, ItemGroup.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
-            </div>
-          </div>
-          <%= f.fields_for :stock do |g| %>
-              <div class="form-group">
-                <%= g.label :quantity, :class => "col-md-3" %>
-                <div class="col-md-9">
-                  <%= g.text_field :quantity, :class => "form-control ", :id => "start_date", :placeholder => "Quantity" %>
-                </div>
-              </div>
-              <div class="form-group">
-                <%= g.label :unit_price, :class => "col-md-3" %>
-                <div class="col-md-9"><%= g.text_field :unit_price, :class => "form-control", :placeholder => "Unit price" %> </div>
-              </div>
-              <div class="form-group">
-                <%= g.label :est_sell_price, :class => "col-md-3" %>
-                <div class="col-md-9"><%= g.text_field :est_sell_price, :class => "form-control", :placeholder => "Estimated selling price" %> </div>
-              </div>
-          <% end %>
-          <div class="form-group">
-            <div class="col-md-offset-3 col-md-9">
-              <%= button_tag(type: "submit", class: "btn btn-success") do %>
-                  <span><i class="fa fa-plus"></i> Create</span>
-              <% end %>
-            </div>
+        <% end %>
+        <div class="form-group">
+          <div class="col-md-offset-3 col-md-9">
+            <%= button_tag(type: "submit", class: "btn btn-success") do %>
+                <span><i class="fa fa-plus"></i> Create</span>
+            <% end %>
           </div>
         </div>
       </div>
-  <% end %>
-</div>
+    </div>
+<% end %>

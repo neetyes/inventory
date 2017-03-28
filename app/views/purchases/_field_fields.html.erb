@@ -10,7 +10,7 @@
     <%= f.text_field :unit_price, :class => "form-control unit-price", :placeholder => "Unit Price" %>
   </td>
   <td>
-    <input type="text" class="form-control total" value="0" disabled>
+    <%= f.text_field :total, :class => "form-control total", :value=> "0" %>
   </td>
   <td>
     <a class="remove_fields" href="#"  data-toggle="toggle" title="Remove"><i class="fa fa-remove text-danger"></i></a>

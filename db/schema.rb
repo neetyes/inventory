@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318162937) do
+ActiveRecord::Schema.define(version: 20170323102314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,16 +91,17 @@ ActiveRecord::Schema.define(version: 20170318162937) do
     t.decimal  "discount"
     t.decimal  "tax"
     t.decimal  "grand_total"
+    t.integer  "credit_limit"
   end
 
   create_table "sale_items", force: :cascade do |t|
     t.decimal  "unit_price"
     t.string   "item_id"
     t.string   "sale_id"
-    t.string   "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal  "total"
+    t.integer  "quantity"
   end
 
   create_table "sales", force: :cascade do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170318162937) do
     t.decimal  "discount"
     t.decimal  "tax"
     t.string   "grand_total"
+    t.integer  "credit_limit"
   end
 
   create_table "stocks", force: :cascade do |t|

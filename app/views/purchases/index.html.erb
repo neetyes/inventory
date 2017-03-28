@@ -1,9 +1,26 @@
-<div class="action text-right">
-  <a href="<%= new_purchase_path %>" class="btn btn-primary">New</a>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Purchase</h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li>Purchases</li>
+    </ol>
+  </div>
 </div>
-<table class="table table-bordered" id="items">
+<div class="row">
+    <div class="col-md-3">
+      <% @company_profile.each_with_index do |c|  %>
+          <h4>Fiscal Year : <%= c.fiscal_year.name %></h4>
+      <% end %>
+    </div>
+  <div class="pull-right">
+  <a href="<%= new_purchase_path %>" class="btn btn-primary">New</a>
+  </div>
+</div>
+<table class="table table-bordered" id="purchase">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
     <th>Supplier's Name</th>
     <th>Bill number</th>
@@ -20,14 +37,14 @@
         <td>
           <%= (@page.to_i - 1) * @number_of_purchases_per_page + i+1 %>
         </td>
-        <td><%= purchase.supplier_id%></td>
+        <td><%= purchase.supplier.name%></td>
         <td><%= purchase.bill_number%></td>
         <td><%= purchase.purchase_date%></td>
         <td><%= purchase.discount %></td>
         <td><%= purchase.tax%></td>
         <td><%= purchase.grand_total %></td>
         <td>
-          <%= link_to "", edit_purchase_path(purchase), :class => "fa fa-pencil", :title => "Edit" %>
+          <a title="View details" href="<%= purchase_item_path(purchase) %>" data-toggle="tooltip" data-placement="right" class="a"><i class="fa fa-eye"  aria-hidden="true"></i></a>
           <%= link_to "", purchase_path(purchase), :class => "fa fa-trash", :title => "Delete",
                       method: :delete,
                       data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
@@ -36,3 +53,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function(){
+        $('#purchase').DataTable();
+    });
+</script>

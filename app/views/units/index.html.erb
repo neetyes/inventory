@@ -1,21 +1,17 @@
-<div class="action text-right">
-  <a href="<%= new_unit_path %>" class="btn btn-primary">New</a>
+<div class="action text-center">
+  <a href="<%= new_unit_path %>" class="btn btn-primary">Add New Unit</a>
 </div>
-<table class="table table-bordered" id="items">
+<table class="table table-bordered" id="units">
   <thead>
   <tr>
-    <th>SN</th>
     <th>Name</th>
     <th>Print name</th>
     <th>Operation</th>
   </tr>
   </thead>
   <tbody>
-  <% @units.each_with_index do |unit, i| %>
+  <% @units.each do |unit, i| %>
       <tr>
-        <td>
-          <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
-        </td>
         <td><%= unit.name%></td>
         <td><%= unit.print_name %></td>
         <td>
@@ -28,3 +24,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function(){
+        $('#units').DataTable();
+    });
+</script>

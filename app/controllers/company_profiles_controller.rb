@@ -1,4 +1,5 @@
 class CompanyProfilesController < ApplicationController
+  add_breadcrumb "Settings", :settings_index_path
   add_breadcrumb "Company Profile", :company_profiles_path
 
   def new

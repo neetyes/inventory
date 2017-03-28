@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3 well">
-  <%= form_for (@unit), url: units_path, :html => {:class => "form-horizontal"} do |f| %>
+  <%= form_for (@unit), url: units_path, :html => {:class => "form-horizontal"}, :id => "unit" do |f| %>
         <% if @unit.errors.any? %>
             <div class="alert-danger">
               <h1>
@@ -31,9 +31,14 @@
             <%= button_tag(type: "submit", class: "btn btn-success") do %>
                 <span><i class="fa fa-plus"></i> Create</span>
             <% end %>
+            <%= button_tag(type: "reset", class: "advanced-reset-btn btn btn-primary", id: "unit") do %>
+                <span><i class="fa fa-times" aria-hidden="true"></i> Reset</span>
+                <% end %>
           </div>
         </div>
-
   <% end %>
   </div>
 </div>
+<script>
+    $('.advanced-reset-btn').click(function() { $('#unit')[0].reset() })
+</script>

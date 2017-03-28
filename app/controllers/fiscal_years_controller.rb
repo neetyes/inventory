@@ -1,4 +1,5 @@
 class FiscalYearsController < ApplicationController
+  add_breadcrumb "Settings", :settings_index_path
   add_breadcrumb "Fiscal Year", :fiscal_years_path
 
   def new

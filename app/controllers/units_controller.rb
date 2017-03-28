@@ -9,7 +9,7 @@ class UnitsController < ApplicationController
   def create
     @unit =Unit.new(unit_param)
     if@unit.save
-      redirect_to @unit
+      redirect_to @unit, notice: "Unit added successfully"
     else
       render 'new'
     end
@@ -21,9 +21,8 @@ class UnitsController < ApplicationController
 
   def index
     @units =Unit.all
-    @number_of_items_per_page=5
     @page = params[:page] || 1
-    @units = Unit.paginate(:page => params[:page], :per_page => 5)
+    @units = Unit.paginate(:page => params[:page], :per_page => 20)
   end
 
   def edit
@@ -34,12 +33,12 @@ class UnitsController < ApplicationController
   def update
     @unit = Unit.find(params[:id])
     @unit.update(unit_param)
-    redirect_to @unit
+    redirect_to @unit, notice: "Unit edited successfully"
   end
 
   def destroy
     @unit = Unit.destroy(params[:id])
-    redirect_to @unit
+    redirect_to @unit, notice: "Unit deleted successfully"
   end
 
   private

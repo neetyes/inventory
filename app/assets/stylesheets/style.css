@@ -8,3 +8,7 @@
 .well{
     background-color: transparent;
 }
+.pull-right
+{
+    padding-right: 15px;
+}

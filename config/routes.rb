@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'purchase_items/show'
+
+  get 'settings/index'
+
   devise_for :users
 
   resources :users
@@ -13,7 +17,9 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :sales
   resources :purchases
+  resources :purchase_items
   resources :logs
+  resources :sale_items
 
   root "systems#index"
 

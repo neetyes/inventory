@@ -1,6 +1,21 @@
 $(document).on 'click', 'form .remove_fields', (event) ->
   $(this).prev('input[type=hidden]').val('1')
-  $(this).closest('tr').remove()
+  row = $(this).closest('tr')
+  value = $('.total',row)
+  data = parseFloat(value.val())
+
+  $('.discount').val('0');
+  $('.tax-percent').val('0')
+
+  grandtotal = $('.total-cost')
+  grand_value = parseFloat(grandtotal.val())
+  if (( grand_value - data) < 0)
+    grandtotal.val('0')
+  else
+    grandtotal.val(( (grand_value - data)).toFixed(4))
+    $('.grand-total').val(( grand_value - data ).toFixed(4))
+
+  row.remove()
   event.preventDefault()
 
 $(document).on 'click', 'form .add_fields', (event) ->

@@ -1,6 +1,19 @@
-<table class="table table-bordered" id="items">
+<div class="row">
+  <div class="col-md-12">
+    <h3>Settings|
+      <small>Logs</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/settings/index">Settings</a></li>
+      <li>Logs</li>
+    </ol>
+  </div>
+</div>
+<table class="table table-bordered" id="logs">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
     <th>User's Name</th>
     <th>Description</th>
@@ -18,3 +31,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#logs').DataTable();
+    });
+</script>

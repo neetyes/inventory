@@ -1,11 +1,29 @@
-<div class="action text-right">
-  <a href="<%= new_sale_path %>" class="btn btn-primary">New</a>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>Sales|</h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li>Sales</li>
+    </ol>
+  </div>
 </div>
-<table class="table table-bordered" id="items">
+<div class="row">
+  <div class="col-md-3">
+    <% @company_profile.each_with_index do |c|  %>
+        <h4>Fiscal Year : <%= c.fiscal_year.name %></h4>
+    <% end %>
+  </div>
+  <div class="pull-right">
+    <a href="<%= new_sale_path %>" class="btn btn-primary">New</a>
+  </div>
+</div>
+<table class="table table-bordered" id="sales">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
-    <th>Customer's id</th>
+    <th>Customer's Name</th>
     <th>Bill number</th>
     <th>Sales date</th>
     <th>Discount</th>
@@ -20,14 +38,14 @@
         <td>
           <%= (@page.to_i - 1) * @number_of_sales_per_page + i+1 %>
         </td>
-        <td><%= sale.customer_id %></td>
+        <td><%= sale.customer.name %></td>
         <td><%= sale.bill_number %></td>
         <td><%= sale.sales_date %></td>
         <td><%= sale.discount %></td>
         <td><%= sale.tax %></td>
         <td><%= sale.grand_total %></td>
         <td>
-          <%= link_to "", edit_sale_path(sale), :class => "fa fa-pencil", :title => "Edit" %>
+          <a title="View details" href="<%= sale_item_path(sale) %>" data-toggle="tooltip" data-placement="right" class="a"><i class="fa fa-eye"  aria-hidden="true"></i></a>
           <%= link_to "", sale_path(sale), :class => "fa fa-trash", :title => "Delete",
                       method: :delete,
                       data: {confirm: "Are you sure"} %> <i aria-hidden="true"></i>
@@ -36,3 +54,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function(){
+        $('#sales').DataTable();
+    });
+</script>

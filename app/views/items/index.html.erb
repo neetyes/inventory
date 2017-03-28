@@ -1,17 +1,27 @@
-<div class="action text-right">
-  <a href="<%= new_item_path %>" class="btn btn-primary">New</a>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Items|
+      <small>List</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li>Items</li>
+    </ol>
+  </div>
 </div>
-<table class="table table-bordered" id="items">
+<div class="action text-center">
+  <a href="<%= new_item_path %>" class="btn btn-primary">Add New Item</a>
+</div>
+<table class="table table-bordered table-hover" id="items">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
     <th>Name</th>
     <th>Item code</th>
-    <th>Unit</th>
     <th>Item group</th>
     <th>Unit Price</th>
     <th>Est sell Price</th>
-    <th>Description</th>
     <th>Stock</th>
     <th>Operation</th>
   </tr>
@@ -22,15 +32,14 @@
         <td>
           <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
         </td>
-        <td><%= item.name%></td>
+        <td><%= item.name %></td>
         <td><%= item.item_code %></td>
-        <td><%= item.unit.name %></td>
         <td><%= item.item_group.name %></td>
         <td><%= item.stock.unit_price %></td>
         <td><%= item.stock.est_sell_price %></td>
-        <td><%= item.description %></td>
         <td><%= item.stock.quantity %></td>
         <td>
+          <%= link_to "", item_path(item), :class => "fa fa-eye", :title => "Edit" %>
           <%= link_to "", edit_item_path(item), :class => "fa fa-pencil", :title => "Edit" %>
           <%= link_to "", item_path(item), :class => "fa fa-trash", :title => "Delete",
                       method: :delete,
@@ -40,3 +49,8 @@
   <% end %>
   </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#items').DataTable();
+    });
+</script>

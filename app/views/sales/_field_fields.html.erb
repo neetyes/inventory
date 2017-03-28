@@ -1,8 +1,18 @@
-<fieldset>
-  <%= f.collection_select :item_name, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
-  <%= f.text_field :quantity, :class => "form-control", :placeholder => "quantity" %>
-  <%= f.text_field :unit_sell_price, :class => "form-control", :placeholder => "unit sell price" %>
-  <input type="text" class="form-control" placeholder="total">
-  <%= f.hidden_field :_destroy %>
-  <%= link_to "[remove]", '#', class: "remove_fields" %>
-</fieldset>
+
+<tr>
+  <td>
+    <%= f.collection_select :item_id, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %>
+  </td>
+  <td>
+    <%= f.text_field :quantity, :class => "form-control quantity", :placeholder => "Quantity" %>
+  </td>
+  <td>
+    <%= f.text_field :unit_price, :class => "form-control unit-price", :placeholder => "Unit Price" %>
+  </td>
+  <td>
+    <%= f.text_field :total, :class => "form-control total", :value=> "0" %>
+  </td>
+  <td>
+    <a class="remove_fields" href="#"  data-toggle="toggle" title="Remove"><i class="fa fa-remove text-danger"></i></a>
+  </td>
+</tr>

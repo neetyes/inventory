@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  add_breadcrumb "Settings", :settings_index_path
+  add_breadcrumb "User", :users_path
   def new
     @user = User.new
     add_breadcrumb "New user", :new_user_path

@@ -1,9 +1,22 @@
-<div class="action text-right">
-  <a href="<%= new_fiscal_year_path %>" class="btn btn-primary">New</a>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Settings|
+      <small>Fiscal Year</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/settings/index">Settings</a></li>
+      <li>Fiscal year</li>
+    </ol>
+  </div>
 </div>
-<table class="table table-bordered" id="courses">
+<div class="action text-center">
+  <a href="<%= new_fiscal_year_path %>" class="btn btn-primary">Add New Fiscal Year</a>
+</div>
+<table class="table table-bordered" id="years">
   <thead>
-  <tr>
+  <tr class="bg-success">
     <th>SN</th>
     <th>Name</th>
     <th>Start date</th>
@@ -17,7 +30,7 @@
         <td>
           <%= (@page.to_i - 1) * @number_of_items_per_page + i+1 %>
         </td>
-        <td><%= fiscal_year.name%></td>
+        <td><%= fiscal_year.name %></td>
         <td><%= fiscal_year.start_date %></td>
         <td><%= fiscal_year.end_date %></td>
         <td>
@@ -30,4 +43,8 @@
   <% end %>
   </tbody>
 </table>
-<%= will_paginate @fiscal_years, renderer: BootstrapPagination::Rails %>
+<script>
+    $(document).ready(function () {
+        $('#years').DataTable();
+    });
+</script>

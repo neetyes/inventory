@@ -1,18 +1,4 @@
-<body>
 <%= form_for (@sale), :html => {:class => "form-horizontal"} do |f| %>
-    <% if @sale.errors.any? %>
-        <div class="alert-danger">
-          <h1>
-            <%= pluralize(@sale.errors.count, "error") %>
-            occured
-          </h1>
-          <ul>
-            <% @sale.errors.full_messages.each do |e| %>
-                <li> <%= e %> </li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
     <div class="row">
       <div class="col-md-7">
         <div class="form-group">
@@ -34,50 +20,94 @@
     <div class="row">
       <div class="col-md-7">
         <div class="form-group">
-          <%= f.label :sale_date, :class => "col-md-3 control-label" %>
+          <%= f.label :sales_date, :class => "col-md-3 control-label" %>
           <div class="col-md-8">
-            <%= f.text_field :sales_date, :class => "form-control ", :id => "sale_date", :placeholder => "YYYY/MM/DD" %>
+            <%= f.text_field :sales_date, :class => "form-control ",:id => "sale_date",  :placeholder => "YYYY/MM/DD" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :credit_limit, :class => "col-md-3 control-label" %>
+          <div class="col-md-8">
+            <%= f.number_field :bill_number, :class => "form-control", :placeholder => "0" %>
           </div>
         </div>
       </div>
     </div>
-    <%= f.fields_for :sale_items do |g| %>
-        <table class="table table-striped" id="items">
-          <thead>
-          <tr>
-            <th><%= g.label :item_id %></th>
-            <th><%= g.label :quantity %></th>
-            <th><%= g.label :unit_price %></th>
-            <th><%= g.label :total %></th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody id="next">
-          <tr>
-            <td><%= g.collection_select :item_id, Item.order(:name), :id, :name, {prompt: "Select Category"}, {class: "form-control"} %></td>
-            <td><%= g.text_field :quantity, :class => "form-control", :placeholder => "quantity" %></td>
-            <td><%= g.text_field :unit_price, :class => "form-control", :placeholder => "unit sell price" %></td>
-            <td><%= g.text_field :total, :class => "form-control", :placeholder => "total" %></td>
-          </tr>
-
-          </tbody>
-        </table>
-    <% end %>
-    <div class="form-group">
-      <div class="col-md-offset-4 col-md-4">
-        <%= button_tag(type: "submit", class: "btn btn-success") do %>
-            <span><i class="fa fa-plus"></i> Create</span>
-        <% end %>
+    <hr>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Item's Name</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody class="add-data">
+      <%= f.fields_for :sale_items do |builder| %>
+          <%= render 'field_fields', f: builder %>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="col-md-8">
+      <%= link_to_add_fields "+", f, :sale_items %>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <div class="form-group">
+          <div class="col-md-4 control-label"><b>Total Cost</b></div>
+          <div class="col-md-8">
+            <input type="text" class="total-cost form-control" value="0" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <div class="form-group">
+          <%= f.label :discount, :class => "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :discount, :class => "form-control discount", :id => "discount", :value => "0" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <div class="form-group">
+          <%= f.label :tax, :class => "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :tax, :class => "form-control tax", :id => "tax",  :value => "0" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <div class="form-group">
+          <%= f.label :grand_total, :class => "col-md-4 control-label" %>
+          <div class="col-md-8">
+            <%= f.text_field :grand_total, :class => "form-control grand-total", :id => "total", :value => "0" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-8 col-md-4">
+        <div class="form-group">
+          <div class="col-md-8 col-md-offset-4">
+            <%= button_tag(type: "submit", class: "btn btn-success form-control") do %>
+                <span><i class="fa fa-plus"></i> Create</span>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 <% end %>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#add").click(function () {
-            $('#next_item').load('next')
-        })
-    });
-</script>
 <script>
     $('#sale_date').datepicker({
         format: "yyyy/mm/dd",
@@ -85,4 +115,39 @@
         $(this).datepicker('hide');
     });
 </script>
-</body>
+
+<script type="text/javascript" charset="utf-8">
+    var count = 1;
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+    $('body').on('blur', '.quantity, .unit-price', function (e) {
+        var row = $(this).closest('tr');
+        var pr = $('.unit-price', row),
+            qu = $('.quantity', row),
+            total = $('.total', row);
+        var grand = $('.total-cost');
+        temp = parseFloat(total.val());
+        buy_pr = parseFloat(pr.val());
+        sell_pr = parseFloat(qu.val());
+        if (!isNaN(buy_pr) && !isNaN(sell_pr)) {
+            total.val(( sell_pr * buy_pr ).toFixed(2));
+            grand.val(( parseFloat(grand.val()) + (parseFloat(total.val()) - temp)).toFixed(2));
+            discount = $("#discount").val();
+            taxable_amount = grand.val() - discount;
+            tax_percent = $("#tax").val();
+            tax_amount = (taxable_amount * tax_percent) / 100;
+            grand_total = taxable_amount + tax_amount;
+            $("#total").val(grand_total).toFixed(2);
+        }
+    });
+    $('body').on('blur', '.discount, .tax', function (e) {
+        discount = $("#discount").val();
+        var grand = $('.total-cost');
+        taxable_amount = grand.val() - discount;
+        tax_percent = $("#tax").val();
+        tax_amount = (taxable_amount * tax_percent) / 100;
+        grand_total = taxable_amount + tax_amount;
+        $("#total").val(grand_total).toFixed(2);
+    });
+</script>

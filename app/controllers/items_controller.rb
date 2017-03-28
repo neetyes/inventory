@@ -31,7 +31,6 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @log = Log.create(description: "item edited " + @item.name, user: current_user )
-    add_breadcrumb "Edit Item", :edit_item_path
   end
 
   def update

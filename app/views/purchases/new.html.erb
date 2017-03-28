@@ -1,4 +1,16 @@
-<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <h3>Purchase|
+      <small>New</small>
+    </h3>
+    <hr>
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/purchases">Purchases</a></li>
+      <li>New</li>
+    </ol>
+  </div>
+</div>
 <% if @purchase.errors.any? %>
     <div class="alert-danger">
       <h1>
@@ -13,4 +25,3 @@
     </div>
 <% end %>
 <%= render "form" %>
-</div>
